@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  medical-chatbot:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=False
+    volumes:
+      - ./processed_data:/app/processed_data
+      - ./faqs.json:/app/faqs.json
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Redis for session storage (uncomment if needed)
+  # redis:
+  #   image: redis:alpine
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+
+  # Optional: Supabase (uncomment if using Supabase)
+  # supabase:
+  #   image: supabase/postgres
+  #   environment:
+  #     POSTGRES_PASSWORD: your_password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - supabase_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+volumes:
+  supabase_data:

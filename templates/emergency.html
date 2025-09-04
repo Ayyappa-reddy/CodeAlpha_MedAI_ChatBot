@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Resources - MedAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .emergency-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .emergency-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .emergency-card.critical {
+            border-left-color: #ef4444;
+            background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+        }
+        
+        .emergency-card.urgent {
+            border-left-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+        }
+        
+        .emergency-card.important {
+            border-left-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .emergency-button {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .emergency-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+        
+        .symptom-checklist {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+        }
+        
+        .first-aid-step {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .first-aid-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        
+        .first-aid-step:nth-child(1)::before { content: '1'; }
+        .first-aid-step:nth-child(2)::before { content: '2'; }
+        .first-aid-step:nth-child(3)::before { content: '3'; }
+        .first-aid-step:nth-child(4)::before { content: '4'; }
+        .first-aid-step:nth-child(5)::before { content: '5'; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gradient">MedAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/homepage" class="text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                    <a href="/about-model" class="text-gray-700 hover:text-blue-600 font-medium py-2">About Model</a>
+                    <a href="/health-library" class="text-gray-700 hover:text-blue-600 font-medium py-2">Health Library</a>
+                    <a href="/emergency" class="text-blue-600 font-medium py-2">Emergency</a>
+                    <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Try AI Chat</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-red-600 pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="pulse-animation">
+                <i class="fas fa-exclamation-triangle text-6xl text-white mb-6"></i>
+            </div>
+            <h1 class="text-5xl font-bold text-white mb-6">Emergency Resources</h1>
+            <p class="text-xl text-red-100 max-w-3xl mx-auto">
+                Life-saving information and emergency contacts when you need them most
+            </p>
+        </div>
+    </section>
+
+    <!-- Emergency Contacts -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Emergency Contacts</h2>
+                <p class="text-xl text-gray-600">Call these numbers immediately in case of emergency</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="emergency-card critical rounded-xl p-8 text-center flex flex-col h-full">
+                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-ambulance text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Medical Emergency</h3>
+                    <div class="text-4xl font-black text-red-600 mb-4">108</div>
+                    <p class="text-gray-600 mb-6 flex-grow">For life-threatening emergencies and severe injuries</p>
+                    <a href="tel:108" class="emergency-button text-white px-8 py-3 rounded-lg font-bold text-lg inline-block mt-auto">
+                        <i class="fas fa-phone mr-2"></i>
+                        Call Now
+                    </a>
+                </div>
+                
+                <div class="emergency-card urgent rounded-xl p-8 text-center flex flex-col h-full">
+                    <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heart text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Poison Control</h3>
+                    <div class="text-4xl font-black text-orange-600 mb-4">1800-116-117</div>
+                    <p class="text-gray-600 mb-6 flex-grow">24/7 poison information and treatment guidance</p>
+                    <a href="tel:1800-116-117" class="bg-orange-500 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-orange-600 transition-colors inline-block mt-auto">
+                        <i class="fas fa-phone mr-2"></i>
+                        Call Now
+                    </a>
+                </div>
+                
+                <div class="emergency-card important rounded-xl p-8 text-center flex flex-col h-full">
+                    <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-head-side-virus text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Crisis Hotline</h3>
+                    <div class="text-4xl font-black text-blue-600 mb-4">1800-599-0019</div>
+                    <p class="text-gray-600 mb-6 flex-grow">Mental health crisis support and suicide prevention</p>
+                    <a href="tel:1800-599-0019" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors inline-block mt-auto">
+                        <i class="fas fa-phone mr-2"></i>
+                        Call Now
+                    </a>
+                </div>
+                
+                <div class="emergency-card important rounded-xl p-8 text-center flex flex-col h-full">
+                    <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Police</h3>
+                    <div class="text-4xl font-black text-green-600 mb-4">100</div>
+                    <p class="text-gray-600 mb-6 flex-grow">For police assistance and security emergencies</p>
+                    <a href="tel:100" class="bg-green-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-green-700 transition-colors inline-block mt-auto">
+                        <i class="fas fa-phone mr-2"></i>
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Symptoms -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Emergency Symptoms</h2>
+                <p class="text-xl text-gray-600">Seek immediate medical attention for these symptoms</p>
+            </div>
+            
+            <div class="symptom-checklist p-8 mb-12">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">🚨 Call 108 Immediately If You Experience:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-heart text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Severe chest pain or pressure</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-lungs text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Difficulty breathing or shortness of breath</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-brain text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Sudden severe headache</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-eye text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Sudden vision loss or changes</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-comment-slash text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Slurred speech or confusion</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-hand-paper text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Weakness or numbness in face/arm/leg</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tint text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Severe bleeding that won't stop</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-thermometer-full text-red-600"></i>
+                            <span class="font-semibold text-gray-800">High fever with rash</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Severe allergic reaction</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-skull text-red-600"></i>
+                            <span class="font-semibold text-gray-800">Thoughts of self-harm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- First Aid Instructions -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Basic First Aid</h2>
+                <p class="text-xl text-gray-600">Essential first aid steps for common emergencies</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- CPR -->
+                <div class="bg-red-50 rounded-xl p-8 border-2 border-red-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-heartbeat text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">CPR (Cardiopulmonary Resuscitation)</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Check for responsiveness</h4>
+                            <p class="text-gray-600">Tap shoulders and shout "Are you okay?"</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Call 108</h4>
+                            <p class="text-gray-600">If unresponsive, call emergency services immediately</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Start chest compressions</h4>
+                            <p class="text-gray-600">Place hands on center of chest, push hard and fast (100-120 compressions/minute)</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Give rescue breaths</h4>
+                            <p class="text-gray-600">Tilt head back, pinch nose, give 2 breaths (if trained)</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Continue until help arrives</h4>
+                            <p class="text-gray-600">Alternate 30 compressions with 2 breaths</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Choking -->
+                <div class="bg-orange-50 rounded-xl p-8 border-2 border-orange-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-lungs text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Heimlich Maneuver</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Recognize choking</h4>
+                            <p class="text-gray-600">Person cannot speak, cough, or breathe</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Stand behind person</h4>
+                            <p class="text-gray-600">Place feet shoulder-width apart for stability</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Make fist with one hand</h4>
+                            <p class="text-gray-600">Place thumb side against abdomen above navel</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Grasp fist with other hand</h4>
+                            <p class="text-gray-600">Press into abdomen with quick upward thrusts</p>
+                        </div>
+                        <div class="first-aid-step">
+                            <h4 class="font-semibold text-gray-800">Repeat until object is expelled</h4>
+                            <p class="text-gray-600">Continue until person can breathe or becomes unconscious</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mental Health Crisis -->
+    <section class="py-20 bg-blue-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Mental Health Crisis Support</h2>
+                <p class="text-xl text-gray-600">You are not alone. Help is available 24/7</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-phone text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Crisis Hotline</h3>
+                    </div>
+                    <div class="text-3xl font-black text-blue-600 mb-4">1800-599-0019</div>
+                    <p class="text-gray-600 mb-6">National Suicide Prevention Lifeline - Available 24/7 for crisis support</p>
+                    <a href="tel:1800-599-0019" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors inline-block">
+                        <i class="fas fa-phone mr-2"></i>
+                        Call 1800-599-0019
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-comments text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Crisis Text Line</h3>
+                    </div>
+                    <div class="text-3xl font-black text-green-600 mb-4">Text HOME to 741741</div>
+                    <p class="text-gray-600 mb-6">Free, 24/7 crisis support via text message</p>
+                    <a href="sms:741741&body=HOME" class="bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors inline-block">
+                        <i class="fas fa-sms mr-2"></i>
+                        Text HOME
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Kit Checklist -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Emergency Kit Checklist</h2>
+                <p class="text-xl text-gray-600">Be prepared with essential emergency supplies</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Medical Supplies</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>First aid kit</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Prescription medications</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Thermometer</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Bandages and gauze</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Antiseptic wipes</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Emergency Contacts</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Emergency services (108)</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Family doctor</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Poison control</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Nearest hospital</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Emergency contacts</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Important Documents</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Medical insurance cards</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Medication list</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Allergy information</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Emergency contact list</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-600"></i>
+                            <span>Medical history</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-red-600">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl font-bold text-white mb-6">Remember: In a True Emergency</h2>
+            <p class="text-xl text-red-100 mb-8">Always call 108 first. This information is for educational purposes only.</p>
+            <div class="bg-white rounded-lg p-6 inline-block">
+                <div class="text-6xl font-black text-red-600 mb-2">108</div>
+                <p class="text-gray-600 font-semibold">Call immediately for life-threatening emergencies</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">MedAI</span>
+                    </div>
+                    <p class="text-gray-400">Revolutionary medical AI powered by advanced NLP and machine learning.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/homepage" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="/about-model" class="text-gray-400 hover:text-white">About Model</a></li>
+                        <li><a href="/health-library" class="text-gray-400 hover:text-white">Health Library</a></li>
+                        <li><a href="/emergency" class="text-gray-400 hover:text-white">Emergency</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/privacy-policy" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/medical-disclaimer" class="text-gray-400 hover:text-white">Medical Disclaimer</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex flex-wrap justify-center md:justify-start space-x-6 mb-4 md:mb-0">
+                        <a href="/resources" class="text-gray-400 hover:text-white transition-colors">Resources</a>
+                        <a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        <a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a>
+                        <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                    <p class="text-gray-400">&copy; 2025 MedAI. All rights reserved. This is for informational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

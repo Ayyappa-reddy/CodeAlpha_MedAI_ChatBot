@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - MedAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .resource-card {
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gradient">MedAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/homepage" class="text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                    <a href="/about-model" class="text-gray-700 hover:text-blue-600 font-medium py-2">About Model</a>
+                    <a href="/health-library" class="text-gray-700 hover:text-blue-600 font-medium py-2">Health Library</a>
+                    <a href="/emergency" class="text-gray-700 hover:text-blue-600 font-medium py-2">Emergency</a>
+                    <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Try AI Chat</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6">Medical Resources</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Comprehensive collection of trusted medical resources, tools, and references
+            </p>
+        </div>
+    </section>
+
+    <!-- Resources Categories -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Resource Categories</h2>
+                <p class="text-xl text-gray-600">Organized by medical specialty and resource type</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Government Health Agencies -->
+                <div class="resource-card bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-landmark text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Government Agencies</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://www.mohfw.gov.in" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Ministry of Health & Family Welfare</a></li>
+                        <li><a href="https://www.icmr.gov.in" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Indian Council of Medical Research</a></li>
+                        <li><a href="https://www.who.int" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>World Health Organization</a></li>
+                        <li><a href="https://www.cdc.gov" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Centers for Disease Control</a></li>
+                    </ul>
+                </div>
+
+                <!-- Medical Databases -->
+                <div class="resource-card bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Medical Databases</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>PubMed</a></li>
+                        <li><a href="https://www.cochrane.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Cochrane Reviews</a></li>
+                        <li><a href="https://www.uptodate.com" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>UpToDate</a></li>
+                        <li><a href="https://www.nejm.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>New England Journal of Medicine</a></li>
+                    </ul>
+                </div>
+
+                <!-- Medical Tools -->
+                <div class="resource-card bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-tools text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Medical Tools</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://www.mdcalc.com" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>MDCalc</a></li>
+                        <li><a href="https://www.medscape.com" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Medscape</a></li>
+                        <li><a href="https://www.drugs.com" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Drugs.com</a></li>
+                        <li><a href="https://www.webmd.com" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>WebMD</a></li>
+                    </ul>
+                </div>
+
+                <!-- Indian Medical Resources -->
+                <div class="resource-card bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-flag text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">India-Specific</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://www.nhp.gov.in" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>National Health Portal</a></li>
+                        <li><a href="https://www.ayush.gov.in" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>AYUSH Ministry</a></li>
+                        <li><a href="https://www.nhm.gov.in" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>National Health Mission</a></li>
+                        <li><a href="https://www.pib.gov.in" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Press Information Bureau</a></li>
+                    </ul>
+                </div>
+
+                <!-- Emergency Resources -->
+                <div class="resource-card bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-ambulance text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Emergency Resources</h3>
+                    <ul class="space-y-3">
+                        <li><a href="/emergency" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-phone mr-2"></i>Emergency Contacts (108)</a></li>
+                        <li><a href="https://www.redcross.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Red Cross</a></li>
+                        <li><a href="https://www.stjohn.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>St. John Ambulance</a></li>
+                        <li><a href="https://www.heart.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>American Heart Association</a></li>
+                    </ul>
+                </div>
+
+                <!-- Educational Resources -->
+                <div class="resource-card bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+                    <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Educational</h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://www.khanacademy.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Khan Academy Medicine</a></li>
+                        <li><a href="https://www.coursera.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>Coursera Medical Courses</a></li>
+                        <li><a href="https://www.edx.org" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>edX Health Sciences</a></li>
+                        <li><a href="https://www.medlineplus.gov" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center"><i class="fas fa-external-link-alt mr-2"></i>MedlinePlus</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Tools -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Quick Access Tools</h2>
+                <p class="text-xl text-gray-600">Essential medical tools and calculators</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                    <i class="fas fa-calculator text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="font-bold text-gray-900 mb-2">BMI Calculator</h3>
+                    <p class="text-gray-600 text-sm mb-4">Calculate Body Mass Index</p>
+                    <a href="https://www.calculator.net/bmi-calculator.html" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">Calculate</a>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                    <i class="fas fa-heartbeat text-3xl text-red-600 mb-4"></i>
+                    <h3 class="font-bold text-gray-900 mb-2">Heart Rate Monitor</h3>
+                    <p class="text-gray-600 text-sm mb-4">Check your heart rate zones</p>
+                    <a href="https://www.heart.org/en/healthy-living/fitness/fitness-basics/target-heart-rates" target="_blank" class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 transition-colors">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                    <i class="fas fa-pills text-3xl text-green-600 mb-4"></i>
+                    <h3 class="font-bold text-gray-900 mb-2">Drug Interactions</h3>
+                    <p class="text-gray-600 text-sm mb-4">Check medication interactions</p>
+                    <a href="https://www.drugs.com/drug_interactions.html" target="_blank" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors">Check</a>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 text-center shadow-md">
+                    <i class="fas fa-thermometer-half text-3xl text-orange-600 mb-4"></i>
+                    <h3 class="font-bold text-gray-900 mb-2">Symptom Checker</h3>
+                    <p class="text-gray-600 text-sm mb-4">Basic symptom assessment</p>
+                    <a href="https://www.webmd.com/symptom-checker" target="_blank" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-700 transition-colors">Check Symptoms</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">MedAI</span>
+                    </div>
+                    <p class="text-gray-400">Revolutionary medical AI powered by advanced NLP and machine learning.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/homepage" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about-model" class="text-gray-400 hover:text-white transition-colors">About Model</a></li>
+                        <li><a href="/health-library" class="text-gray-400 hover:text-white transition-colors">Health Library</a></li>
+                        <li><a href="/emergency" class="text-gray-400 hover:text-white transition-colors">Emergency</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/resources" class="text-gray-400 hover:text-white transition-colors">Medical Resources</a></li>
+                        <li><a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex flex-wrap justify-center md:justify-start space-x-6 mb-4 md:mb-0">
+                        <a href="/resources" class="text-gray-400 hover:text-white transition-colors">Resources</a>
+                        <a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        <a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a>
+                        <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                    <p class="text-gray-400">&copy; 2025 MedAI. All rights reserved. This is for informational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

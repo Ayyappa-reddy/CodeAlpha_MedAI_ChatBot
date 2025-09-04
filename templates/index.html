@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI Chat - Revolutionary Medical AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .message-bubble {
+            animation: fadeInUp 0.4s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #9ca3af;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .chat-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .message-user {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .message-ai {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .quick-action-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quick-action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .quick-action-btn:hover::before {
+            left: 100%;
+        }
+        
+        .confidence-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gradient">MedAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/homepage" class="text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                    <a href="/about-model" class="text-gray-700 hover:text-blue-600 font-medium py-2">About Model</a>
+                    <a href="/health-library" class="text-gray-700 hover:text-blue-600 font-medium py-2">Health Library</a>
+                    <a href="/emergency" class="text-gray-700 hover:text-blue-600 font-medium py-2">Emergency</a>
+                    <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">AI Chat</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-24 pb-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <span class="text-green-100 font-medium">AI Assistant Online</span>
+            </div>
+            <h1 class="text-4xl font-bold text-white mb-2">Medical AI Chat</h1>
+            <p class="text-xl text-blue-100">Ask me anything about your health concerns</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-bolt text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">Quick Actions</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <button class="quick-action-btn w-full text-left p-4 text-sm bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 rounded-xl transition-all duration-300 border border-blue-200" data-query="What are the symptoms of diabetes?">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-heartbeat text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Diabetes Symptoms</div>
+                                    <div class="text-xs text-gray-600">Common signs to watch for</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="quick-action-btn w-full text-left p-4 text-sm bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 rounded-xl transition-all duration-300 border border-green-200" data-query="How to lower blood pressure naturally?">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-heart text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Blood Pressure</div>
+                                    <div class="text-xs text-gray-600">Natural management tips</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="quick-action-btn w-full text-left p-4 text-sm bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200 rounded-xl transition-all duration-300 border border-purple-200" data-query="Heart disease prevention tips">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Heart Health</div>
+                                    <div class="text-xs text-gray-600">Prevention strategies</div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Stats -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">AI Performance</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Accuracy</span>
+                            <span class="text-sm font-semibold text-green-600">~85%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Response Time</span>
+                            <span class="text-sm font-semibold text-blue-600">&lt;1s</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Training Data</span>
+                            <span class="text-sm font-semibold text-purple-600">256K+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="lg:col-span-3">
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden h-[700px] flex flex-col">
+                    <!-- Chat Messages -->
+                    <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+                        <!-- Welcome Message -->
+                        <div class="message-bubble message-ai rounded-2xl p-6 max-w-4xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-robot text-white"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <span class="font-bold text-gray-900">MedAI Assistant</span>
+                                        <div class="confidence-badge text-white text-xs px-2 py-1 rounded-full">
+                                            <i class="fas fa-check mr-1"></i>Ready
+                                        </div>
+                                        <span class="text-xs text-gray-500">Just now</span>
+                                    </div>
+                                    <div class="text-gray-800 leading-relaxed">
+                                        <p class="mb-4">Hello! I'm your advanced medical AI assistant, trained on a comprehensive database of 256,916+ doctor-patient conversations.</p>
+                                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                            <div class="flex items-start space-x-2">
+                                                <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                                                <div class="text-sm text-blue-800">
+                                                    <p class="font-semibold mb-1">Important Notice:</p>
+                                                    <p>This is for informational purposes only. Always consult healthcare professionals for medical advice, diagnosis, or treatment.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-6">
+                        <div class="flex space-x-4">
+                            <div class="flex-1 relative">
+                                <input type="text" id="message-input" 
+                                       class="w-full bg-white border-2 border-gray-200 rounded-2xl px-6 py-4 pr-14 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                       placeholder="Ask me about your health concerns...">
+                                <button id="send-btn" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-10 h-10 gradient-bg rounded-xl flex items-center justify-center text-white hover:shadow-lg transition-all duration-200">
+                                    <i class="fas fa-paper-plane text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-3">
+                            <div class="flex items-center space-x-4 text-xs text-gray-500">
+                                <span><i class="fas fa-shield-alt mr-1"></i>Secure & Private</span>
+                                <span><i class="fas fa-clock mr-1"></i>Fast Response</span>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Press Enter to send
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Global variables
+        let sessionId = null;
+
+        // DOM elements
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEventListeners();
+        });
+
+        function initializeEventListeners() {
+            // Send message
+            sendBtn.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            // Quick action buttons
+            document.querySelectorAll('.quick-action-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    messageInput.value = this.dataset.query;
+                    sendMessage();
+                });
+            });
+
+        }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            messageInput.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        session_id: sessionId,
+                        language: 'en'
+                    })
+                });
+
+                const data = await response.json();
+                
+                // Store session ID
+                if (data.session_id) {
+                    sessionId = data.session_id;
+                }
+
+                // Hide typing indicator
+                hideTypingIndicator();
+
+                // Add bot response
+                addMessage(data.response, 'bot', data);
+
+            } catch (error) {
+                console.error('Error:', error);
+                hideTypingIndicator();
+                addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+            }
+        }
+
+        function addMessage(content, sender, data = {}) {
+            const messageDiv = document.createElement('div');
+            const isUser = sender === 'user';
+            
+            messageDiv.className = `message-bubble ${isUser ? 'ml-auto max-w-xs' : 'max-w-4xl'}`;
+
+            if (isUser) {
+                messageDiv.innerHTML = `
+                    <div class="message-user rounded-2xl p-4 text-white">
+                        <div class="text-sm leading-relaxed">${content}</div>
+                    </div>
+                `;
+            } else {
+                const confidenceBadge = data.confidence ? `
+                    <div class="confidence-badge text-white text-xs px-2 py-1 rounded-full">
+                        <i class="fas fa-check mr-1"></i>${Math.round(data.confidence * 100)}% match
+                    </div>
+                ` : '';
+                
+                messageDiv.innerHTML = `
+                    <div class="message-ai rounded-2xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-robot text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="font-bold text-gray-900">MedAI Assistant</span>
+                                    ${confidenceBadge}
+                                    <span class="text-xs text-gray-500">${new Date().toLocaleTimeString()}</span>
+                                </div>
+                                <div class="text-gray-800 leading-relaxed">${content}</div>
+                                ${data.disclaimer ? `
+                                    <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                                        <div class="flex items-start space-x-2">
+                                            <i class="fas fa-exclamation-triangle text-yellow-600 mt-1"></i>
+                                            <div class="text-sm text-yellow-800">${data.disclaimer}</div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'message-bubble max-w-4xl';
+            typingDiv.innerHTML = `
+                <div class="message-ai rounded-2xl p-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <span class="font-bold text-gray-900">MedAI Assistant</span>
+                                <div class="bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
+                                    <i class="fas fa-clock mr-1"></i>Thinking
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="typing-indicator">
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                </div>
+                                <span class="text-gray-600 text-sm">Processing your question...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+    </script>
+</body>
+</html>
