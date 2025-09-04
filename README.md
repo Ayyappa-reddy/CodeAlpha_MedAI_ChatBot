@@ -123,12 +123,19 @@ medical-ai-chatbot/
 ├── collab.py              # Model training code (7 parts)
 ├── preprocess.py          # Data preprocessing
 ├── requirements.txt       # Python dependencies
+├── vercel.json           # Vercel deployment configuration
 ├── models/               # Trained model files (create after training)
 │   ├── patient_faiss_index.bin
 │   ├── description_faiss_index.bin
 │   ├── medical_chatbot_metadata.pkl
 │   └── ...
-├── templates/            # HTML templates
+├── public/               # Static files for Vercel deployment
+│   ├── homepage.html     # Landing page
+│   ├── about-model.html  # Model information
+│   ├── contact.html      # Contact page
+│   ├── index.html        # Chat interface
+│   └── static/           # CSS and assets
+├── templates/            # Original HTML templates
 │   ├── index.html        # Main chat interface
 │   ├── homepage.html     # Landing page
 │   ├── about-model.html  # Model information
@@ -229,7 +236,15 @@ python test_model_loading.py
 
 ## 🚀 Deployment
 
-### Railway (Recommended)
+### Vercel (Frontend/UI Only - Recommended for Demo)
+1. **Connect your GitHub repository to Vercel**
+2. **Vercel will automatically detect the `public/` folder**
+3. **Deploy!** - Your UI will be live instantly
+4. **Access your site:** `https://your-project.vercel.app`
+
+**Note:** This deploys only the frontend/UI. The chatbot functionality requires the backend.
+
+### Full Stack Deployment (Railway)
 1. Connect your GitHub repository to Railway
 2. Set environment variables in Railway dashboard
 3. Deploy automatically on push

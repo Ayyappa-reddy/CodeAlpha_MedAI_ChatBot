@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/public/homepage.html"
+    },
+    {
+      "src": "/homepage",
+      "dest": "/public/homepage.html"
+    },
+    {
+      "src": "/about-model",
+      "dest": "/public/about-model.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/public/contact.html"
+    },
+    {
+      "src": "/emergency",
+      "dest": "/public/emergency.html"
+    },
+    {
+      "src": "/health-library",
+      "dest": "/public/health-library.html"
+    },
+    {
+      "src": "/resources",
+      "dest": "/public/resources.html"
+    },
+    {
+      "src": "/privacy-policy",
+      "dest": "/public/privacy-policy.html"
+    },
+    {
+      "src": "/terms-of-service",
+      "dest": "/public/terms-of-service.html"
+    },
+    {
+      "src": "/medical-disclaimer",
+      "dest": "/public/medical-disclaimer.html"
+    },
+    {
+      "src": "/chat",
+      "dest": "/public/index.html"
+    }
+  ]
+}

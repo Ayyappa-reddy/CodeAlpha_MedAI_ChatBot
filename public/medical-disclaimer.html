@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Disclaimer - MedAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gradient">MedAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/homepage" class="text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                    <a href="/about-model" class="text-gray-700 hover:text-blue-600 font-medium py-2">About Model</a>
+                    <a href="/health-library" class="text-gray-700 hover:text-blue-600 font-medium py-2">Health Library</a>
+                    <a href="/emergency" class="text-gray-700 hover:text-blue-600 font-medium py-2">Emergency</a>
+                    <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Try AI Chat</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6">Medical Disclaimer</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Important information about the limitations of our AI medical assistant
+            </p>
+        </div>
+    </section>
+
+    <!-- Disclaimer Content -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            
+            <div class="bg-red-100 border-l-4 border-red-500 p-8 mb-12">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-3xl mr-4"></i>
+                    <h2 class="text-3xl font-bold text-red-900">CRITICAL NOTICE</h2>
+                </div>
+                <p class="text-red-800 text-lg font-semibold">MedAI is NOT a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of qualified healthcare providers with questions about medical conditions.</p>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">1. Nature of Service</h2>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">What MedAI Provides:</h3>
+                    <ul class="list-disc pl-6 text-blue-700">
+                        <li>General health information and education</li>
+                        <li>AI-powered responses to health-related questions</li>
+                        <li>Access to medical resources and references</li>
+                        <li>Emergency contact information and guidance</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-800 mb-4">What MedAI Does NOT Provide:</h3>
+                    <ul class="list-disc pl-6 text-red-700">
+                        <li>Medical diagnosis or treatment recommendations</li>
+                        <li>Professional medical advice</li>
+                        <li>Replacement for doctor-patient consultations</li>
+                        <li>Emergency medical services</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">2. Limitations of AI Technology</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-yellow-800 mb-3">AI Limitations</h3>
+                        <ul class="list-disc pl-6 text-yellow-700 text-sm">
+                            <li>Cannot perform physical examinations</li>
+                            <li>Cannot access your medical history</li>
+                            <li>May not recognize all symptoms</li>
+                            <li>Cannot provide personalized treatment plans</li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-orange-800 mb-3">Information Accuracy</h3>
+                        <ul class="list-disc pl-6 text-orange-700 text-sm">
+                            <li>Information may not be current</li>
+                            <li>AI responses are based on training data</li>
+                            <li>May not cover all medical conditions</li>
+                            <li>Cannot replace clinical judgment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">3. When to Seek Professional Help</h2>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Always Consult Healthcare Professionals For:</h3>
+                    <ul class="list-disc pl-6 text-green-700">
+                        <li>Any new or worsening symptoms</li>
+                        <li>Persistent pain or discomfort</li>
+                        <li>Changes in existing conditions</li>
+                        <li>Medication questions or side effects</li>
+                        <li>Preventive care and screenings</li>
+                        <li>Mental health concerns</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">4. Emergency Situations</h2>
+                <div class="bg-red-100 border-2 border-red-500 rounded-lg p-8 text-center">
+                    <i class="fas fa-phone text-red-600 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-red-900 mb-4">In Case of Emergency</h3>
+                    <p class="text-red-800 text-lg mb-4">Do NOT rely on MedAI for emergency medical situations</p>
+                    <div class="text-4xl font-black text-red-600 mb-4">Call 108</div>
+                    <p class="text-red-800">For immediate medical assistance</p>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">5. User Responsibility</h2>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">By Using MedAI, You Acknowledge:</h3>
+                    <ul class="list-disc pl-6 text-gray-700">
+                        <li>You understand the limitations of AI technology</li>
+                        <li>You will not use MedAI as a substitute for professional medical care</li>
+                        <li>You will seek appropriate medical attention when needed</li>
+                        <li>You understand that medical information changes frequently</li>
+                        <li>You will verify important information with healthcare providers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">6. Liability Disclaimer</h2>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <p class="text-red-800 mb-4 font-semibold">MedAI and its operators are not liable for:</p>
+                    <ul class="list-disc pl-6 text-red-700">
+                        <li>Any medical decisions made based on AI responses</li>
+                        <li>Delays in seeking professional medical care</li>
+                        <li>Misinterpretation of AI-provided information</li>
+                        <li>Any health outcomes related to use of this service</li>
+                        <li>Technical errors or service interruptions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">7. Best Practices</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">✅ Do:</h3>
+                        <ul class="list-disc pl-6 text-blue-700 text-sm">
+                            <li>Use MedAI for general health education</li>
+                            <li>Verify important information with doctors</li>
+                            <li>Keep regular appointments with healthcare providers</li>
+                            <li>Use emergency services for urgent situations</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-red-800 mb-3">❌ Don't:</h3>
+                        <ul class="list-disc pl-6 text-red-700 text-sm">
+                            <li>Rely solely on AI for medical decisions</li>
+                            <li>Ignore professional medical advice</li>
+                            <li>Use MedAI for emergency situations</li>
+                            <li>Self-diagnose based on AI responses</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold text-yellow-900 mb-2">Remember</h2>
+                <p class="text-yellow-800 text-lg">MedAI is a tool to supplement, not replace, professional medical care. Your health and safety are our top priorities, and we encourage you to always consult with qualified healthcare professionals for medical concerns.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">MedAI</span>
+                    </div>
+                    <p class="text-gray-400">Revolutionary medical AI powered by advanced NLP and machine learning.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/homepage" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/about-model" class="text-gray-400 hover:text-white transition-colors">About Model</a></li>
+                        <li><a href="/health-library" class="text-gray-400 hover:text-white transition-colors">Health Library</a></li>
+                        <li><a href="/emergency" class="text-gray-400 hover:text-white transition-colors">Emergency</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/resources" class="text-gray-400 hover:text-white transition-colors">Medical Resources</a></li>
+                        <li><a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex flex-wrap justify-center md:justify-start space-x-6 mb-4 md:mb-0">
+                        <a href="/resources" class="text-gray-400 hover:text-white transition-colors">Resources</a>
+                        <a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        <a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a>
+                        <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                    <p class="text-gray-400">&copy; 2025 MedAI. All rights reserved. This is for informational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

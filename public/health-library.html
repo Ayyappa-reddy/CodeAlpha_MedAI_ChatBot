@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Library - MedAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 50;
+            display: none;
+        }
+        
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f9fafb;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border: 2px solid transparent;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.1);
+        }
+        
+        .article-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-chip {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-chip.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .filter-chip:hover {
+            transform: scale(1.05);
+        }
+        
+        .body-system-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .reading-time {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            color: #3730a3;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .difficulty-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .difficulty-beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .difficulty-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .difficulty-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gradient">MedAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/homepage" class="text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                    <a href="/about-model" class="text-gray-700 hover:text-blue-600 font-medium py-2">About Model</a>
+                    <a href="/health-library" class="text-blue-600 font-medium py-2">Health Library</a>
+                    <a href="/emergency" class="text-gray-700 hover:text-blue-600 font-medium py-2">Emergency</a>
+                    <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Try AI Chat</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6">Health Library</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+                Comprehensive medical knowledge base with searchable articles, body system guides, and health information
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto search-container">
+                <div class="relative">
+                    <input type="text" id="search-input" 
+                           class="w-full px-6 py-4 pr-12 rounded-lg text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                           placeholder="Search medical topics, symptoms, treatments...">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                </div>
+                <div id="search-results" class="search-results"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Body Systems -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Explore by Body System</h2>
+                <p class="text-xl text-gray-600">Browse medical information organized by anatomical systems</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="category-card rounded-xl p-6 cursor-pointer" onclick="filterByCategory('cardiovascular')">
+                    <div class="flex items-center mb-4">
+                        <div class="body-system-icon bg-red-500 mr-4">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Cardiovascular</h3>
+                            <p class="text-gray-600">Heart & Blood Vessels</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Learn about heart health, blood pressure, circulation, and cardiovascular diseases.</p>
+                </div>
+                
+                <div class="category-card rounded-xl p-6 cursor-pointer" onclick="filterByCategory('respiratory')">
+                    <div class="flex items-center mb-4">
+                        <div class="body-system-icon bg-blue-500 mr-4">
+                            <i class="fas fa-lungs"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Respiratory</h3>
+                            <p class="text-gray-600">Lungs & Breathing</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Information about lung health, breathing disorders, and respiratory conditions.</p>
+                </div>
+                
+                <div class="category-card rounded-xl p-6 cursor-pointer" onclick="filterByCategory('nervous')">
+                    <div class="flex items-center mb-4">
+                        <div class="body-system-icon bg-purple-500 mr-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Nervous System</h3>
+                            <p class="text-gray-600">Brain & Nerves</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Neurological conditions, brain health, and nervous system disorders.</p>
+                </div>
+                
+                <div class="category-card rounded-xl p-6 cursor-pointer" onclick="filterByCategory('digestive')">
+                    <div class="flex items-center mb-4">
+                        <div class="body-system-icon bg-green-500 mr-4">
+                            <i class="fas fa-stomach"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Digestive</h3>
+                            <p class="text-gray-600">Gut & Digestion</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Digestive health, gastrointestinal disorders, and nutrition information.</p>
+                </div>
+                
+                <div class="category-card rounded-xl p-6 cursor-pointer" onclick="filterByCategory('musculoskeletal')">
+                    <div class="flex items-center mb-4">
+                        <div class="body-system-icon bg-orange-500 mr-4">
+                            <i class="fas fa-bone"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Musculoskeletal</h3>
+                            <p class="text-gray-600">Bones & Muscles</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Bone health, muscle disorders, arthritis, and orthopedic conditions.</p>
+                </div>
+                
+                <div class="category-card rounded-xl p-6 cursor-pointer" onclick="filterByCategory('endocrine')">
+                    <div class="flex items-center mb-4">
+                        <div class="body-system-icon bg-pink-500 mr-4">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Endocrine</h3>
+                            <p class="text-gray-600">Hormones & Metabolism</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Hormonal disorders, diabetes, thyroid conditions, and metabolic health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Tags -->
+    <section class="py-8 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <div class="filter-chip active px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium" onclick="filterByTag('all')">
+                    All Topics
+                </div>
+                <div class="filter-chip px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium" onclick="filterByTag('symptoms')">
+                    Symptoms
+                </div>
+                <div class="filter-chip px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium" onclick="filterByTag('treatments')">
+                    Treatments
+                </div>
+                <div class="filter-chip px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium" onclick="filterByTag('prevention')">
+                    Prevention
+                </div>
+                <div class="filter-chip px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium" onclick="filterByTag('diagnosis')">
+                    Diagnosis
+                </div>
+                <div class="filter-chip px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-medium" onclick="filterByTag('medications')">
+                    Medications
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Articles</h2>
+                <p class="text-xl text-gray-600">Popular medical topics and health information</p>
+            </div>
+            
+            <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Health Tips -->
+    <section class="py-20 bg-blue-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Quick Health Tips</h2>
+                <p class="text-xl text-gray-600">Essential health information at a glance</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-heart text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Heart Health</h3>
+                    <p class="text-gray-600 text-sm">Exercise 30 minutes daily, eat heart-healthy foods, and monitor blood pressure regularly.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-lungs text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Respiratory Health</h3>
+                    <p class="text-gray-600 text-sm">Avoid smoking, practice deep breathing exercises, and maintain good indoor air quality.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-apple-alt text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Nutrition</h3>
+                    <p class="text-gray-600 text-sm">Eat a balanced diet with fruits, vegetables, whole grains, and lean proteins.</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-moon text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Sleep Health</h3>
+                    <p class="text-gray-600 text-sm">Aim for 7-9 hours of quality sleep and maintain a consistent sleep schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl font-bold text-white mb-6">Need Personalized Health Advice?</h2>
+            <p class="text-xl text-blue-100 mb-8">Our AI medical assistant can provide personalized responses based on your specific questions</p>
+            <a href="/" class="bg-white text-blue-600 px-12 py-4 rounded-lg font-bold text-xl hover:bg-gray-100 transition-all transform hover:scale-105 inline-block">
+                <i class="fas fa-comments mr-2"></i>
+                Ask the AI Doctor
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">MedAI</span>
+                    </div>
+                    <p class="text-gray-400">Revolutionary medical AI powered by advanced NLP and machine learning.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/homepage" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="/about-model" class="text-gray-400 hover:text-white">About Model</a></li>
+                        <li><a href="/health-library" class="text-gray-400 hover:text-white">Health Library</a></li>
+                        <li><a href="/emergency" class="text-gray-400 hover:text-white">Emergency</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/privacy-policy" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/medical-disclaimer" class="text-gray-400 hover:text-white">Medical Disclaimer</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex flex-wrap justify-center md:justify-start space-x-6 mb-4 md:mb-0">
+                        <a href="/resources" class="text-gray-400 hover:text-white transition-colors">Resources</a>
+                        <a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        <a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a>
+                        <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                    <p class="text-gray-400">&copy; 2025 MedAI. All rights reserved. This is for informational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample medical articles data
+        const articles = [
+            {
+                id: 1,
+                title: "Understanding Heart Disease: Symptoms and Prevention",
+                excerpt: "Learn about the most common cardiovascular conditions, their symptoms, and how to prevent heart disease through lifestyle changes.",
+                category: "cardiovascular",
+                tags: ["symptoms", "prevention"],
+                difficulty: "beginner",
+                readTime: "5 min",
+                author: "Dr. Sarah Johnson",
+                date: "2025-01-15"
+            },
+            {
+                id: 2,
+                title: "Diabetes Management: Blood Sugar Control Strategies",
+                excerpt: "Comprehensive guide to managing diabetes through diet, exercise, medication, and regular monitoring.",
+                category: "endocrine",
+                tags: ["treatments", "medications"],
+                difficulty: "intermediate",
+                readTime: "8 min",
+                author: "Dr. Michael Chen",
+                date: "2025-01-12"
+            },
+            {
+                id: 3,
+                title: "Respiratory Health: Breathing Exercises and Lung Care",
+                excerpt: "Discover techniques to improve lung function and manage respiratory conditions effectively.",
+                category: "respiratory",
+                tags: ["treatments", "prevention"],
+                difficulty: "beginner",
+                readTime: "6 min",
+                author: "Dr. Emily Rodriguez",
+                date: "2025-01-10"
+            },
+            {
+                id: 4,
+                title: "Neurological Disorders: Early Detection and Treatment",
+                excerpt: "Understanding common neurological conditions, their early signs, and available treatment options.",
+                category: "nervous",
+                tags: ["diagnosis", "treatments"],
+                difficulty: "advanced",
+                readTime: "12 min",
+                author: "Dr. James Wilson",
+                date: "2025-01-08"
+            },
+            {
+                id: 5,
+                title: "Digestive Health: Gut Microbiome and Nutrition",
+                excerpt: "Explore the connection between gut health, nutrition, and overall well-being.",
+                category: "digestive",
+                tags: ["prevention", "treatments"],
+                difficulty: "intermediate",
+                readTime: "7 min",
+                author: "Dr. Lisa Thompson",
+                date: "2025-01-05"
+            },
+            {
+                id: 6,
+                title: "Arthritis Management: Pain Relief and Mobility",
+                excerpt: "Comprehensive approach to managing arthritis symptoms and maintaining joint health.",
+                category: "musculoskeletal",
+                tags: ["treatments", "medications"],
+                difficulty: "intermediate",
+                readTime: "9 min",
+                author: "Dr. Robert Davis",
+                date: "2025-01-03"
+            }
+        ];
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        let searchTimeout;
+
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim();
+            
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            searchTimeout = setTimeout(() => {
+                performSearch(query);
+            }, 300);
+        });
+
+        function performSearch(query) {
+            const filteredArticles = articles.filter(article => 
+                article.title.toLowerCase().includes(query.toLowerCase()) ||
+                article.excerpt.toLowerCase().includes(query.toLowerCase()) ||
+                article.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+            );
+            
+            displaySearchResults(filteredArticles);
+        }
+
+        function displaySearchResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item text-gray-500">No articles found</div>';
+            } else {
+                searchResults.innerHTML = results.map(article => `
+                    <div class="search-result-item" onclick="openArticle(${article.id})">
+                        <div class="font-semibold text-gray-900">${article.title}</div>
+                        <div class="text-sm text-gray-600">${article.excerpt.substring(0, 100)}...</div>
+                        <div class="text-xs text-blue-600 mt-1">${article.category} • ${article.readTime}</div>
+                    </div>
+                `).join('');
+            }
+            searchResults.style.display = 'block';
+        }
+
+        // Filter functionality
+        function filterByTag(tag) {
+            // Update active filter chip
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter articles
+            let filteredArticles = articles;
+            if (tag !== 'all') {
+                filteredArticles = articles.filter(article => 
+                    article.tags.includes(tag)
+                );
+            }
+            
+            displayArticles(filteredArticles);
+        }
+
+        function filterByCategory(category) {
+            const filteredArticles = articles.filter(article => 
+                article.category === category
+            );
+            displayArticles(filteredArticles);
+        }
+
+        function displayArticles(articlesToShow) {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = articlesToShow.map(article => `
+                <div class="article-card rounded-xl p-6 shadow-lg cursor-pointer" onclick="openArticle(${article.id})">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="difficulty-badge difficulty-${article.difficulty}">${article.difficulty}</span>
+                        <span class="reading-time">${article.readTime}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">${article.title}</h3>
+                    <p class="text-gray-600 mb-4">${article.excerpt}</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-2">
+                            ${article.tags.map(tag => `
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">${tag}</span>
+                            `).join('')}
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            ${article.author}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openArticle(id) {
+            // Hide search results
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+            
+            // In a real application, this would navigate to the full article
+            alert(`Opening article ${id}. In a real application, this would show the full article content.`);
+        }
+
+        // Hide search results when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Initialize with all articles
+        displayArticles(articles);
+    </script>
+</body>
+</html>

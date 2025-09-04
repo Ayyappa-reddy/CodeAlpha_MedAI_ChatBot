@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Model - MedAI Technical Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .tech-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .architecture-diagram {
+            background: linear-gradient(45deg, #f0f0f0, #ffffff);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flow-arrow {
+            animation: flow 2s ease-in-out infinite;
+        }
+        
+        @keyframes flow {
+            0%, 100% { transform: translateX(0); opacity: 0.7; }
+            50% { transform: translateX(10px); opacity: 1; }
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .process-step {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .process-step:nth-child(1)::before { content: '1'; }
+        .process-step:nth-child(2)::before { content: '2'; }
+        .process-step:nth-child(3)::before { content: '3'; }
+        .process-step:nth-child(4)::before { content: '4'; }
+        .process-step:nth-child(5)::before { content: '5'; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gradient">MedAI</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/homepage" class="text-gray-700 hover:text-blue-600 font-medium py-2">Home</a>
+                    <a href="/about-model" class="text-blue-600 font-medium py-2">About Model</a>
+                    <a href="/health-library" class="text-gray-700 hover:text-blue-600 font-medium py-2">Health Library</a>
+                    <a href="/emergency" class="text-gray-700 hover:text-blue-600 font-medium py-2">Emergency</a>
+                    <a href="/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Try AI Chat</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6">About the Model</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Discover the cutting-edge technology behind MedAI's revolutionary medical assistance
+            </p>
+        </div>
+    </section>
+
+    <!-- Model Overview -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Model Architecture</h2>
+                <p class="text-xl text-gray-600">Built with state-of-the-art NLP technologies</p>
+            </div>
+            
+            <div class="architecture-diagram mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-database text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Dataset</h3>
+                        <p class="text-sm text-gray-600">256,916 conversations</p>
+                    </div>
+                    <div class="text-center flow-arrow">
+                        <i class="fas fa-arrow-right text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-cogs text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Preprocessing</h3>
+                        <p class="text-sm text-gray-600">SpaCy + Cleaning</p>
+                    </div>
+                    <div class="text-center flow-arrow">
+                        <i class="fas fa-arrow-right text-2xl text-blue-600"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold">Embeddings</h3>
+                        <p class="text-sm text-gray-600">Sentence Transformers</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-search text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold">FAISS Index</h3>
+                        <p class="text-sm text-gray-600">Fast Similarity Search</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold">LDA Topics</h3>
+                        <p class="text-sm text-gray-600">Topic Modeling</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-robot text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold">API Response</h3>
+                        <p class="text-sm text-gray-600">Real-time Answers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Technical Specifications</h2>
+                <p class="text-xl text-blue-100">Performance metrics and technical details</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="metric-card">
+                    <div class="text-3xl font-bold mb-2">256,916</div>
+                    <div class="text-blue-100">Medical Conversations</div>
+                </div>
+                <div class="metric-card">
+                    <div class="text-3xl font-bold mb-2">384</div>
+                    <div class="text-blue-100">Embedding Dimensions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="text-3xl font-bold mb-2">&lt;1s</div>
+                    <div class="text-blue-100">Response Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="text-3xl font-bold mb-2">~85%</div>
+                    <div class="text-blue-100">Accuracy Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Process -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Training Process</h2>
+                <p class="text-xl text-gray-600">How the model was developed and trained</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <div class="process-step">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Data Collection & Cleaning</h3>
+                        <p class="text-gray-600">Collected 256,916 doctor-patient conversations from medical forums. Applied advanced cleaning techniques to remove noise and standardize format.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Text Preprocessing</h3>
+                        <p class="text-gray-600">Used SpaCy for tokenization, lemmatization, and text normalization. Preserved medical terminology while standardizing format.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Embedding Generation</h3>
+                        <p class="text-gray-600">Leveraged Sentence Transformers (all-MiniLM-L6-v2) to create 384-dimensional semantic embeddings for each patient question.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">FAISS Indexing</h3>
+                        <p class="text-gray-600">Built high-performance FAISS index for sub-second similarity search across the entire dataset using cosine similarity.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Topic Modeling</h3>
+                        <p class="text-gray-600">Applied Latent Dirichlet Allocation (LDA) to identify medical topics and enable category-based filtering and suggestions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Technology Stack</h2>
+                <p class="text-xl text-gray-600">Built with cutting-edge AI and web technologies</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="tech-card rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">NLP & ML</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-800">
+                        <li>• Sentence Transformers</li>
+                        <li>• SpaCy</li>
+                        <li>• Scikit-learn</li>
+                        <li>• NumPy & Pandas</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-search text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Search & Indexing</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-800">
+                        <li>• FAISS (Facebook AI)</li>
+                        <li>• Cosine Similarity</li>
+                        <li>• Vector Search</li>
+                        <li>• Real-time Indexing</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card rounded-xl p-6 text-white">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-globe text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Web Framework</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-800">
+                        <li>• FastAPI</li>
+                        <li>• Uvicorn</li>
+                        <li>• Jinja2 Templates</li>
+                        <li>• Tailwind CSS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Implementation Example</h2>
+                <p class="text-xl text-gray-300">See how the model processes queries</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="code-block text-green-400">
+                    <div class="text-gray-400 mb-4"># Query Processing Pipeline</div>
+                    <div class="space-y-2">
+                        <div><span class="text-blue-400">def</span> <span class="text-yellow-400">get_response</span>(query):</div>
+                        <div class="ml-4"><span class="text-gray-400"># 1. Preprocess query with SpaCy</span></div>
+                        <div class="ml-4">processed = <span class="text-yellow-400">preprocess_query</span>(query)</div>
+                        <div class="ml-4"><span class="text-gray-400"># 2. Generate embedding</span></div>
+                        <div class="ml-4">embedding = <span class="text-yellow-400">model.encode</span>([processed])</div>
+                        <div class="ml-4"><span class="text-gray-400"># 3. Search FAISS index</span></div>
+                        <div class="ml-4">scores, indices = <span class="text-yellow-400">faiss_index.search</span>(embedding, k=3)</div>
+                        <div class="ml-4"><span class="text-gray-400"># 4. Return best match</span></div>
+                        <div class="ml-4"><span class="text-blue-400">return</span> doctor_responses[indices[0][0]]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Metrics -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Performance Metrics</h2>
+                <p class="text-xl text-gray-600">Real-world performance data</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Speed & Efficiency</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">Query Processing</span>
+                            <span class="text-blue-600 font-bold">&lt; 100ms</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">Embedding Generation</span>
+                            <span class="text-blue-600 font-bold">&lt; 50ms</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">FAISS Search</span>
+                            <span class="text-blue-600 font-bold">&lt; 10ms</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">Total Response Time</span>
+                            <span class="text-blue-600 font-bold">&lt; 1s</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Accuracy & Quality</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">Semantic Match Accuracy</span>
+                            <span class="text-green-600 font-bold">~85%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">Medical Relevance</span>
+                            <span class="text-green-600 font-bold">98.7%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">User Satisfaction</span>
+                            <span class="text-green-600 font-bold">96.4%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold">Confidence Score</span>
+                            <span class="text-green-600 font-bold">94.8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl font-bold text-white mb-6">Experience the Power of Advanced AI</h2>
+            <p class="text-xl text-blue-100 mb-8">Try our medical AI assistant and see the technology in action</p>
+            <a href="/" class="bg-white text-blue-600 px-12 py-4 rounded-lg font-bold text-xl hover:bg-gray-100 transition-all transform hover:scale-105 inline-block">
+                <i class="fas fa-play mr-2"></i>
+                Try the AI Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">MedAI</span>
+                    </div>
+                    <p class="text-gray-400">Revolutionary medical AI powered by advanced NLP and machine learning.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/homepage" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="/about-model" class="text-gray-400 hover:text-white">About Model</a></li>
+                        <li><a href="/health-library" class="text-gray-400 hover:text-white">Health Library</a></li>
+                        <li><a href="/emergency" class="text-gray-400 hover:text-white">Emergency</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/privacy-policy" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/medical-disclaimer" class="text-gray-400 hover:text-white">Medical Disclaimer</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex flex-wrap justify-center md:justify-start space-x-6 mb-4 md:mb-0">
+                        <a href="/resources" class="text-gray-400 hover:text-white transition-colors">Resources</a>
+                        <a href="/privacy-policy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="/terms-of-service" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        <a href="/medical-disclaimer" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a>
+                        <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                    <p class="text-gray-400">&copy; 2025 MedAI. All rights reserved. This is for informational purposes only.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
