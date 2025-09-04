@@ -265,8 +265,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Yannam Ayyappa Reddy**
 - Email: ayyappareddyyennam@gmail.com
-- LinkedIn: [Your LinkedIn Profile]
-- GitHub: [Your GitHub Profile]
+- LinkedIn: [Ayyappa Reddy Yennam](https://www.linkedin.com/in/ayyappa-reddy-yennam-27616626a)
+- GitHub: [@Ayyappa-reddy](https://github.com/Ayyappa-reddy)
 
 ## 🙏 Acknowledgments
 
